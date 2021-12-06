@@ -3,8 +3,8 @@
 <head>
     <!-- head-->
     <meta name="author"content = "Damerau" />
-    <meta name="title"content = "IREB survey PDF Generator" />
-    <meta name="description"content = "IREB survey PDF Generator for generating IREB-based surveys for it-systems and requirements engineering" />
+    <meta name="title"content = "Requirements Gathering survey PDF Generator" />
+    <meta name="description"content = "PDF Generator for generating IREB-based Requirements gathering surveys for it-systems and requirements engineering. The Code is optimized to be inserted in the HTML-Code-Plugin in Atlassian Confluence"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
 <style>
     
@@ -36,15 +36,28 @@
 </head>
 <body>
 <div id="survey">
-    <p><font size="3" color="red">This is p one</font></p>
-    <p><font size="10" color="green">More Text to be printed on PDF</font></p>
+    <label for="author">Dokument erstellt von:</label>
+    <input type="text" id="author" name="author">
 
  </div>
- <a href="javascript:generatePDF()" class="generateButton">als pdf exportieren</a>
-
+ <a href="getValueOf();javascript:generatePDF()" class="generateButton">als pdf exportieren</a>
 </body>
 <footer>
+    <!--
+        Scripts for Datepicking and Survey-PDF-Output
+    -->
 <script>
+    let current = new Date();
+let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
+let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+let dateTime = cDate + ' ' + cTime;
+console.log(dateTime);
+
+function getValueOf() {
+  let valAuthor = document.getElementById("author").value;
+  
+}
+
     function generatePDF() {
  var doc = new jsPDF();  //create jsPDF object
   doc.fromHTML(document.getElementById("survey"), // page element which you want to print as PDF
@@ -55,7 +68,7 @@
   },
   function(a) 
    {
-    doc.save("HTML2PDF.pdf"); // save file name as HTML2PDF.pdf
+    doc.save(dateTime+"_Requirements_Gathering_1.0.pdf"); // save file + name
   });
 }
 </script>
